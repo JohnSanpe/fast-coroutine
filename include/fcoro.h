@@ -62,7 +62,7 @@ struct fcoro_worker {
     struct rb_root_cached ready;
     struct list_head zombies;
 
-    ucontext_t retc;
+    fcontext_t retc;
     struct fcoro_work *prev;
     struct fcoro_work *curr;
     uint64_t min_vtime;
@@ -89,7 +89,6 @@ static inline void fcoro_dyprio_reset(struct fcoro_work *work)
         work->dyprio = work->prio;
 }
 
-extern struct kcoro_worker *kcoro_worker_vcreate(const char *namefmt, va_list args);
 extern struct fcoro_worker *fcoro_worker_create(const char *name, ...);
 extern void fcoro_worker_destroy(struct fcoro_worker *worker);
 
